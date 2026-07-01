@@ -42,22 +42,39 @@ export function TransparentLogo({ className = '', height = 48 }: TransparentLogo
       const dark = theme === 'dark'
 
       for (let i = 0; i < data.length; i += 4) {
-        const r = data[i]
-        const g = data[i + 1]
-        const b = data[i + 2]
+        let r = data[i]
+        let g = data[i + 1]
+        let b = data[i + 2]
         const brightness = (r + g + b) / 3
 
-        // Strip white/near-white background → transparent (soft edge)
-        if (brightness > 238) {
+        // Strip white/near-white background → transparent (crisp, minimal fade)
+        if (brightness > 244) {
           data[i + 3] = 0
-        } else if (brightness > 205) {
-          const f = (brightness - 205) / (238 - 205)
+          continue
+        } else if (brightness > 224) {
+          const f = (brightness - 224) / (244 - 224)
           data[i + 3] = Math.round(data[i + 3] * (1 - f))
-        } else if (dark) {
+        }
+
+        if (dark) {
           // Lift the dark-green artwork toward bone-white for dark surfaces
           data[i] = Math.round(r + (242 - r) * 0.5)
           data[i + 1] = Math.round(g + (243 - g) * 0.5)
           data[i + 2] = Math.round(b + (236 - b) * 0.5)
+        } else {
+          // Boost saturation + contrast so the green reads rich, not dull
+          const avg = (r + g + b) / 3
+          const sat = 1.35 // saturation multiplier
+          const con = 1.12 // contrast multiplier
+          r = (r - avg) * sat + avg
+          g = (g - avg) * sat + avg
+          b = (b - avg) * sat + avg
+          r = (r - 128) * con + 128
+          g = (g - 128) * con + 128
+          b = (b - 128) * con + 128
+          data[i] = Math.max(0, Math.min(255, Math.round(r)))
+          data[i + 1] = Math.max(0, Math.min(255, Math.round(g)))
+          data[i + 2] = Math.max(0, Math.min(255, Math.round(b)))
         }
       }
 
