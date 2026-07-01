@@ -39,7 +39,7 @@ export function CinematicHero() {
             <h1 className="type-hero mb-8 fade-up" style={{ animationDelay: '80ms' }}>
               Ancient Science,
               <br />
-              <span className="text-gradient" style={{ fontStyle: 'italic' }}>
+              <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>
                 Modern Wellness.
               </span>
             </h1>
@@ -72,9 +72,8 @@ export function CinematicHero() {
       </section>
 
       {/* ═══ STAT BAND — big numbers, count-up ═══ */}
-      <section className="section-mist page-margin relative overflow-hidden">
-        <AmbientBackground />
-        <div className="relative z-10 grid grid-cols-2 gap-x-8 gap-y-12 py-20 md:grid-cols-4 md:py-24">
+      <section className="section-mist page-margin border-y border-border">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-20 md:grid-cols-4 md:py-24">
           {stats.map((s) => (
             <div key={s.label}>
               <div className="stat-figure">

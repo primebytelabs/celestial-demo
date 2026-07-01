@@ -23,8 +23,8 @@
   --shadow-card:  0 1px 2px rgba(28, 33, 24, 0.04), 0 14px 40px rgba(28, 33, 24, 0.07);
   --shadow-glow:  0 12px 34px rgba(47, 107, 60, 0.28);
 
-  --ambient-1:    rgba(47, 107, 60, 0.22);
-  --ambient-2:    rgba(198, 162, 74, 0.16);
+  --ambient-1:    rgba(47, 107, 60, 0.10);
+  --ambient-2:    rgba(198, 162, 74, 0.07);
 
   --section-gap:  clamp(4.5rem, 11vw, 10rem);
   --page-margin:  max(1.5rem, calc((100vw - 1240px) / 2));
@@ -47,8 +47,8 @@
   --shadow-card:  none;
   --shadow-glow:  0 12px 36px rgba(95, 163, 108, 0.34);
 
-  --ambient-1:    rgba(95, 163, 108, 0.20);
-  --ambient-2:    rgba(212, 178, 92, 0.12);
+  --ambient-1:    rgba(95, 163, 108, 0.10);
+  --ambient-2:    rgba(212, 178, 92, 0.06);
 }
 
 @theme inline {

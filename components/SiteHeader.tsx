@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { TransparentLogo } from '@/components/TransparentLogo'
 
 const LINKS = [
   { label: 'Science', href: '/#research' },
@@ -9,36 +10,6 @@ const LINKS = [
   { label: 'Manufacturing', href: '/#manufacturing' },
   { label: 'Distributors', href: '/distributors' },
 ]
-
-function Wordmark() {
-  return (
-    <span className="flex items-center gap-2.5">
-      <svg
-        viewBox="0 0 24 24"
-        className="h-5 w-5"
-        style={{ color: 'var(--accent)' }}
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M12 21C12 13 7 8 4 6c0 8 3 13 8 15Zm0 0c0-8 5-13 8-15 0 8-3 13-8 15Z"
-          fill="currentColor"
-          fillOpacity="0.18"
-          stroke="currentColor"
-          strokeWidth="1.3"
-          strokeLinejoin="round"
-        />
-        <path d="M12 21C12 15 12 10 12 6" stroke="currentColor" strokeWidth="1.1" />
-      </svg>
-      <span
-        className="text-[1.1rem] font-semibold tracking-tight"
-        style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}
-      >
-        Celestial Biolabs
-      </span>
-    </span>
-  )
-}
 
 function ThemeToggle({ size = 'md' }: { size?: 'sm' | 'md' }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
@@ -103,8 +74,8 @@ export function SiteHeader() {
           borderBottom: `1px solid ${scrolled ? 'var(--border)' : 'transparent'}`,
         }}
       >
-        <Link href="/" aria-label="Celestial Biolabs — home">
-          <Wordmark />
+        <Link href="/" aria-label="Celestial Biolabs — home" className="flex items-center">
+          <TransparentLogo height={scrolled ? 34 : 44} className="transition-all duration-300" />
         </Link>
 
         {/* Desktop nav */}
