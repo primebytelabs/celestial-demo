@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Newsreader } from "next/font/google";
+import { Inter, Newsreader, Fraunces } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import SmoothScroll from "@/components/SmoothScroll";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -20,6 +20,13 @@ const newsreader = Newsreader({
   display: "swap",
 });
 
+const fraunces = Fraunces({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["700", "900"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Celestial Biolabs — Ayurvedic & Pharmaceutical Manufacturing",
   description:
@@ -32,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${newsreader.variable}`}
+      className={`${inter.variable} ${newsreader.variable} ${fraunces.variable}`}
     >
       <head>
         {/* Inline script to prevent white flash in dark mode */}

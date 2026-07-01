@@ -5,33 +5,38 @@ import { company } from '@/lib/content'
 
 export function QualitySection() {
   return (
-    <section id="quality" className="section-gap bg-paper page-margin border-t border-line">
-      <div className="grid gap-16 lg:grid-cols-[1fr_1.5fr] items-start">
-        <div>
-          <p className="type-label-botanical mb-6">04 / Oversight</p>
-          <h2 className="type-editorial-headline text-ink">Quality & Compliance</h2>
-        </div>
+    <section id="quality" className="section-gap bg-mist page-margin">
+      <div className="grid gap-24 lg:grid-cols-[1.5fr_1fr] items-start">
         <Reveal>
           <div className="space-y-8">
-            <p className="type-editorial-title text-ink leading-relaxed">
-              Our regulatory mindset demands continuous oversight, systematic testing, and rigorous compliance checks.
-            </p>
-            <p className="text-moss text-base leading-relaxed">
-              We approach quality assurance with a focus on traceability and improvement. This includes testing raw materials for purity before batch release, ensuring systematic validation of finished products, and checking compliance across corporate structures.
-            </p>
-            
-            <div className="border-t border-line divide-y divide-line pt-6">
-              {[
-                ["Corporate Identity", company.legalName],
-                ["CIN", company.cin],
-                ["BSE Registry", `Symbol: ${company.bseSymbol} / Scrip: ${company.bseScrip}`],
-              ].map(([k, v]) => (
-                <div key={k} className="py-4 grid md:grid-cols-[200px_1fr] gap-4">
-                  <span className="type-label-botanical !text-moss">{k}</span>
-                  <span className="text-ink text-sm">{v}</span>
-                </div>
-              ))}
+            <div>
+              <span className="label-kicker">04 / Oversight</span>
+              <h2 className="type-display-lg mt-6">Quality & Compliance</h2>
             </div>
+
+            <p className="type-display-md text-secondary">
+              Our regulatory mindset demands continuous oversight, systematic testing, and rigorous compliance.
+            </p>
+
+            <p className="body-text leading-relaxed">
+              We approach quality assurance with focus on traceability and improvement—testing raw materials for purity before batch release, systematically validating finished products, and ensuring compliance across all corporate structures.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Compliance facts: right column */}
+        <Reveal delay={0.1}>
+          <div className="space-y-8">
+            {[
+              ["Corporate", company.legalName],
+              ["CIN", company.cin],
+              ["BSE Symbol", company.bseSymbol],
+            ].map(([label, value]) => (
+              <div key={label} className="border-b border-border pb-6 last:border-0">
+                <span className="label-kicker">{label}</span>
+                <p className="text-ink font-semibold text-lg mt-2">{value}</p>
+              </div>
+            ))}
           </div>
         </Reveal>
       </div>
