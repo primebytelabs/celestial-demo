@@ -10,14 +10,14 @@ export function AboutSection() {
       <div className="grid-asymmetric-right">
         {/* Left: Image (narrower) */}
         <Reveal delay={0.1}>
-          <div className="relative w-full aspect-[4/5] overflow-hidden bg-mist border border-accent group rounded-sm">
+          <div className="relative w-full aspect-[4/3] overflow-hidden bg-mist border border-border group rounded-2xl">
             <Image
-              src="/images/family-images.png"
+              src="/images/family-images.jpg"
               alt="Trusted Ayurvedic care for generations"
               fill
-              className="object-cover object-center w-full h-full transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              priority={false}
+              className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              priority
             />
             {/* Editorial badge: top-left corner */}
             <div className="absolute top-0 left-0 bg-accent text-paper px-3 py-2">

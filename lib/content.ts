@@ -69,13 +69,6 @@ export const proprietaryProducts: Product[] = [
     image: "/images/rumacel-oil.png"
   },
   {
-    name: "Bio-Dnorm",
-    slug: "bio-dnorm",
-    category: "proprietary",
-    form: "Tablets / Capsules",
-    description: "A specialized proprietary formulation for chronic metabolic and blood sugar care."
-  },
-  {
     name: "DermaCel",
     slug: "dermacel",
     category: "proprietary",

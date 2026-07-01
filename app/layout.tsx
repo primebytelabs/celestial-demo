@@ -3,6 +3,7 @@ import { Inter, Fraunces } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import SmoothScroll from "@/components/SmoothScroll";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ChatAssistant } from "@/components/ChatAssistant";
 import "./globals.css";
 
 const inter = Inter({
@@ -63,6 +64,7 @@ export default function RootLayout({
           </main>
           <SiteFooter />
         </SmoothScroll>
+        <ChatAssistant />
       </body>
     </html>
   );
