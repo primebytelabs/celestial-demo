@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { TransparentLogo } from '@/components/TransparentLogo'
 
 const LINKS = [
   { label: 'Science', href: '/#research' },
@@ -11,60 +10,98 @@ const LINKS = [
   { label: 'Distributors', href: '/distributors' },
 ]
 
-export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+function Wordmark() {
+  return (
+    <span className="flex items-center gap-2.5">
+      <span
+        className="inline-block h-2.5 w-2.5 rounded-full"
+        style={{ background: 'linear-gradient(120deg, var(--accent), var(--accent-2))' }}
+      />
+      <span
+        className="text-[1.05rem] font-semibold tracking-tight"
+        style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}
+      >
+        Celestial Biolabs
+      </span>
+    </span>
+  )
+}
+
+function ThemeToggle({ size = 'md' }: { size?: 'sm' | 'md' }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', fn, { passive: true })
-    
-    // Check initial theme state
-    const isDark = document.documentElement.classList.contains('dark')
-    setTheme(isDark ? 'dark' : 'light')
-
-    return () => window.removeEventListener('scroll', fn)
+    const current = (document.documentElement.getAttribute('data-theme') as 'light' | 'dark') || 'light'
+    setTheme(current)
   }, [])
 
-  const toggleTheme = () => {
-    const root = document.documentElement
-    if (theme === 'dark') {
-      root.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-      setTheme('light')
-    } else {
-      root.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-      setTheme('dark')
-    }
+  const toggle = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    document.documentElement.setAttribute('data-theme', next)
+    try { localStorage.setItem('theme', next) } catch (_) {}
+    setTheme(next)
   }
+
+  const s = size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'
+
+  return (
+    <button
+      onClick={toggle}
+      className="grid place-items-center rounded-full p-2 transition-colors"
+      style={{ color: 'var(--secondary)' }}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+    >
+      {theme === 'dark' ? (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className={s}>
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className={s}>
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </svg>
+      )}
+    </button>
+  )
+}
+
+export function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 24)
+    fn()
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
+  }, [])
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 page-margin transition-all duration-500 flex items-center justify-between"
+        className="fixed top-0 left-0 right-0 z-50 page-margin flex items-center justify-between transition-all duration-300"
         style={{
-          height: scrolled ? '80px' : '132px',
-          background: scrolled ? 'var(--paper)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(8px)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--border-line)' : '1px solid transparent',
+          height: scrolled ? '68px' : '92px',
+          background: scrolled
+            ? 'color-mix(in srgb, var(--paper) 72%, transparent)'
+            : 'transparent',
+          backdropFilter: scrolled ? 'blur(14px) saturate(1.4)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(14px) saturate(1.4)' : 'none',
+          borderBottom: `1px solid ${scrolled ? 'var(--border)' : 'transparent'}`,
         }}
       >
-        <Link href="/" className="flex items-center">
-          <TransparentLogo
-            height={scrolled ? 50 : 72}
-            className="transition-all duration-300 object-contain"
-          />
+        <Link href="/" aria-label="Celestial Biolabs — home">
+          <Wordmark />
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden items-center gap-10 lg:flex">
-          {LINKS.map(l => (
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-9 lg:flex">
+          {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="type-label-botanical !text-moss hover:!text-ink transition-colors duration-200"
+              className="text-sm font-medium transition-colors"
+              style={{ color: 'var(--secondary)' }}
             >
               {l.label}
             </Link>
@@ -72,55 +109,20 @@ export function SiteHeader() {
         </nav>
 
         {/* Right controls */}
-        <div className="hidden lg:flex items-center gap-8">
-          {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="text-moss hover:text-ink transition-colors focus:outline-none"
-            aria-label="Toggle light/dark theme"
-          >
-            {theme === 'dark' ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-              </svg>
-            )}
-          </button>
-
-          <Link
-            href="/distributors"
-            className="type-label-botanical hover:underline underline-offset-4"
-          >
-            Partner ↗
+        <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle />
+          <Link href="/distributors" className="btn-primary !py-2.5 !px-5 text-sm">
+            Partner with us
           </Link>
         </div>
 
         {/* Mobile controls */}
-        <div className="flex items-center gap-4 lg:hidden">
-          <button
-            onClick={toggleTheme}
-            className="text-moss hover:text-ink transition-colors focus:outline-none"
-            aria-label="Toggle light/dark theme"
-          >
-            {theme === 'dark' ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-              </svg>
-            )}
-          </button>
-          
+        <div className="flex items-center gap-1 lg:hidden">
+          <ThemeToggle size="sm" />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="type-label-botanical !text-moss"
+            className="rounded-md px-3 py-2 text-sm font-medium"
+            style={{ color: 'var(--ink)' }}
             aria-label="Toggle menu"
           >
             {menuOpen ? 'Close' : 'Menu'}
@@ -130,13 +132,16 @@ export function SiteHeader() {
 
       {/* Mobile overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-paper flex flex-col justify-center page-margin">
-          <nav className="flex flex-col gap-8">
-            {LINKS.map(l => (
+        <div
+          className="fixed inset-0 z-40 flex flex-col justify-center page-margin"
+          style={{ background: 'var(--paper)' }}
+        >
+          <nav className="flex flex-col gap-7">
+            {LINKS.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className="type-editorial-headline text-ink hover:text-clay transition-colors"
+                className="type-display-lg"
                 onClick={() => setMenuOpen(false)}
               >
                 {l.label}
@@ -144,10 +149,10 @@ export function SiteHeader() {
             ))}
             <Link
               href="/distributors"
-              className="type-editorial-headline text-clay mt-4"
+              className="btn-primary mt-4 self-start"
               onClick={() => setMenuOpen(false)}
             >
-              Partner ↗
+              Partner with us
             </Link>
           </nav>
         </div>

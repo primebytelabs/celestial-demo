@@ -1,70 +1,127 @@
 'use client'
 
-import { useLayoutEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { company } from '@/lib/content'
+import Link from 'next/link'
+import { company, proprietaryProducts, sourcedHerbs } from '@/lib/content'
+
+function HeroLattice() {
+  // Precise, thin-lined connected-node lattice — the one bold element.
+  const nodes = [
+    { cx: 60, cy: 90, c: '' },
+    { cx: 190, cy: 55, c: 'n2' },
+    { cx: 330, cy: 95, c: 'n3' },
+    { cx: 455, cy: 60, c: 'n4' },
+    { cx: 110, cy: 220, c: 'n5' },
+    { cx: 250, cy: 190, c: 'n2' },
+    { cx: 395, cy: 225, c: '' },
+    { cx: 70, cy: 360, c: 'n3' },
+    { cx: 215, cy: 350, c: 'n4' },
+    { cx: 360, cy: 375, c: 'n5' },
+    { cx: 470, cy: 340, c: 'n2' },
+    { cx: 170, cy: 470, c: '' },
+    { cx: 320, cy: 480, c: 'n3' },
+  ]
+  const links: [number, number][] = [
+    [0, 1], [1, 2], [2, 3], [0, 4], [1, 5], [2, 5], [2, 6], [3, 6],
+    [4, 5], [5, 6], [4, 7], [5, 8], [6, 9], [6, 10], [7, 8], [8, 9],
+    [9, 10], [7, 11], [8, 11], [8, 12], [9, 12],
+  ]
+  return (
+    <svg
+      className="lattice h-full w-full"
+      viewBox="0 0 520 520"
+      fill="none"
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <defs>
+        <radialGradient id="latticeGlow" cx="55%" cy="42%" r="55%">
+          <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.28" />
+          <stop offset="55%" stopColor="var(--accent-2)" stopOpacity="0.10" />
+          <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle className="lattice-glow" cx="270" cy="230" r="230" />
+      {links.map(([a, b], i) => (
+        <line
+          key={i}
+          className="lattice-line"
+          x1={nodes[a].cx}
+          y1={nodes[a].cy}
+          x2={nodes[b].cx}
+          y2={nodes[b].cy}
+        />
+      ))}
+      {nodes.map((n, i) => (
+        <circle key={i} className={`lattice-node ${n.c}`} cx={n.cx} cy={n.cy} r={i % 4 === 0 ? 4 : 2.6} />
+      ))}
+    </svg>
+  )
+}
+
+const stats = [
+  { value: String(company.founded), label: 'Established' },
+  { value: String(proprietaryProducts.length), label: 'Formulations' },
+  { value: String(sourcedHerbs.length), label: 'Sourced botanicals' },
+  { value: company.bseScrip, label: 'BSE listed' },
+]
 
 export function CinematicHero() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const headlineRef = useRef<HTMLHeadingElement>(null)
-  const descRef = useRef<HTMLParagraphElement>(null)
-  const factsRef = useRef<HTMLDivElement>(null)
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // Stagger animation: headline, description, facts
-      gsap.fromTo(headlineRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
-      )
-      gsap.fromTo(descRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.1 }
-      )
-      gsap.fromTo(factsRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.2 }
-      )
-    }, containerRef)
-    return () => ctx.revert()
-  }, [])
-
   return (
-    <section ref={containerRef} className="relative min-h-[95vh] flex items-center bg-paper pt-24 pb-24">
-      <div className="page-margin w-full">
-        <div className="grid-asymmetric-left">
-          {/* Left: Headline, description (wider column) */}
-          <div className="max-w-xl">
-            <span className="label-kicker label-kicker-accent">Established 1997</span>
+    <section className="relative overflow-hidden bg-paper">
+      {/* Signature lattice visual */}
+      <div
+        className="pointer-events-none absolute right-0 top-0 h-full w-[52%] max-w-[720px] opacity-90"
+        aria-hidden="true"
+      >
+        <HeroLattice />
+      </div>
 
-            <h1 ref={headlineRef} className="type-hero mb-8 opacity-0">
-              Engineering Health
-            </h1>
+      <div className="page-margin relative z-10 flex min-h-[92vh] flex-col justify-center pt-32 pb-20">
+        <div className="max-w-3xl">
+          <span className="label-kicker label-kicker-accent mb-6 fade-up">
+            Ayurvedic &amp; Pharmaceutical Manufacturing · Est. 1997
+          </span>
 
-            <p ref={descRef} className="body-text text-secondary mb-16 opacity-0 max-w-lg">
-              Since 1997, Celestial Biolabs has manufactured standardized Ayurvedic formulations and proprietary medicines — uniting traditional preparation standards with modern analytical testing.
-            </p>
+          <h1 className="type-hero mb-7 fade-up" style={{ animationDelay: '60ms' }}>
+            Engineering health through{' '}
+            <span className="text-gradient">precision science</span>.
+          </h1>
 
-            <button className="btn-primary">Explore Our Products</button>
+          <p
+            className="body-text mb-10 max-w-xl fade-up"
+            style={{ color: 'var(--secondary)', animationDelay: '120ms' }}
+          >
+            {company.legalName} manufactures standardized Ayurvedic formulations and
+            proprietary medicines — pairing traditional preparation standards with modern
+            analytical testing, from Hyderabad since 1997.
+          </p>
+
+          <div className="flex flex-wrap gap-4 fade-up" style={{ animationDelay: '180ms' }}>
+            <Link href="/products" className="btn-primary">
+              Explore products
+            </Link>
+            <Link href="/distributors" className="btn-secondary">
+              Talk to our team
+            </Link>
           </div>
+        </div>
 
-          {/* Right: Bold accent rectangle with facts (narrower column) */}
-          <div className="flex flex-col justify-start">
-            <div ref={factsRef} className="bg-accent text-paper p-12 rounded-sm opacity-0 space-y-8">
-              <div className="border-t border-paper/30 pt-6">
-                <p className="text-xs font-bold text-paper/70 uppercase tracking-widest mb-1">Founded</p>
-                <p className="text-2xl font-bold">1997</p>
+        {/* Stat row — tabular figures */}
+        <div
+          className="mt-20 grid max-w-4xl grid-cols-2 gap-x-8 gap-y-8 border-t pt-10 sm:grid-cols-4 fade-up"
+          style={{ borderColor: 'var(--border)', animationDelay: '240ms' }}
+        >
+          {stats.map((s) => (
+            <div key={s.label}>
+              <div
+                className="tabular text-3xl font-semibold sm:text-4xl"
+                style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}
+              >
+                {s.value}
               </div>
-              <div className="border-t border-paper/30 pt-6">
-                <p className="text-xs font-bold text-paper/70 uppercase tracking-widest mb-1">Headquarters</p>
-                <p className="text-lg">Hyderabad</p>
-              </div>
-              <div className="border-t border-paper/30 pt-6">
-                <p className="text-xs font-bold text-paper/70 uppercase tracking-widest mb-1">BSE Listing</p>
-                <p className="text-lg font-mono">532871</p>
-              </div>
+              <div className="label-kicker mt-2">{s.label}</div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

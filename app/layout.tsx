@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Newsreader, Fraunces } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import SmoothScroll from "@/components/SmoothScroll";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -8,22 +8,14 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const newsreader = Newsreader({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const fraunces = Fraunces({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["700", "900"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -39,20 +31,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${newsreader.variable} ${fraunces.variable}`}
+      data-theme="light"
+      className={`${inter.variable} ${spaceGrotesk.variable}`}
     >
       <head>
-        {/* Inline script to prevent white flash in dark mode */}
+        {/* Inline script: set theme before paint (no flash), respect saved choice + system pref */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
+                var t = localStorage.getItem('theme');
+                if (t !== 'light' && t !== 'dark') {
+                  t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 }
-              } catch (_) {}
+                document.documentElement.setAttribute('data-theme', t);
+              } catch (_) {
+                document.documentElement.setAttribute('data-theme', 'light');
+              }
             `,
           }}
         />
