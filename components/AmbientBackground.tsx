@@ -1,21 +1,25 @@
 /**
- * Ambient animated background — premium on its own (soft drifting botanical
- * gradient mesh in greens/golds). Drop real Ayurvedic footage into the marked
- * <video> slot when available (herbs, leaves, mortar & pestle, fields, lab).
+ * Ambient section background: a dimmed, looping Ayurvedic macro video (honey on
+ * leaves) with a theme-colored scrim over it so foreground text stays readable,
+ * plus a soft drifting gradient tint. The video is hidden on mobile and under
+ * prefers-reduced-motion, where the gradient tint alone carries the mood.
  */
 export function AmbientBackground() {
   return (
     <div className="ambient" aria-hidden="true">
-      {/* ═══════════════════════════════════════════════════════════
-          REPLACE: hero/section background video
-          Uncomment and set the src to an Ayurvedic footage loop.
-          Keep it muted + loop + playsInline; lazy where possible.
-          ───────────────────────────────────────────────────────────
-      <video className="ambient-video" autoPlay muted loop playsInline preload="none" poster="">
-        <source src="/media/ayurveda-loop.webm" type="video/webm" />
-        <source src="/media/ayurveda-loop.mp4" type="video/mp4" />
+      {/* REPLACE: swap for higher-res / .webm Ayurvedic footage when available */}
+      <video
+        className="ambient-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+      >
+        <source src="/videos/ayurveda-hero.mp4" type="video/mp4" />
       </video>
-      ═══════════════════════════════════════════════════════════ */}
+      {/* Scrim dims the footage toward the theme background for contrast */}
+      <div className="ambient-scrim" />
     </div>
   )
 }
