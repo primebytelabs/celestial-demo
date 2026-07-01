@@ -17,7 +17,7 @@ export function ManufacturingSection() {
         </div>
 
         {/* Content Grid: Asymmetric */}
-        <div className="grid gap-20 lg:grid-cols-[1.2fr_1fr] items-start">
+        <div className="grid gap-20 lg:grid-cols-[1.2fr_1fr] items-center">
           <Reveal>
             <div className="space-y-8">
               <p className="type-display-md text-secondary">
