@@ -9,8 +9,12 @@ export function WhyChooseUsSection() {
       <div className="space-y-20">
         {/* Header */}
         <div>
-          <span className="label-kicker">07 / Brand Pillars</span>
-          <h2 className="type-display-xl mt-6">Why Choose Us</h2>
+          <span className="label-kicker">Brand Pillars</span>
+          <h2 className="type-display-xl mt-6">
+            Why
+            <br />
+            Choose Us
+          </h2>
         </div>
 
         {/* Pillars grid: 2x2 with numbered cards */}

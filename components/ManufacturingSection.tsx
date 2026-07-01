@@ -8,8 +8,12 @@ export function ManufacturingSection() {
       <div className="space-y-24">
         {/* Header */}
         <div>
-          <span className="label-kicker">03 / Standard Operations</span>
-          <h2 className="type-display-xl mt-6">Manufacturing Excellence</h2>
+          <span className="label-kicker">Standard Operations</span>
+          <h2 className="type-display-xl mt-6">
+            Manufacturing
+            <br />
+            <span className="text-accent">Excellence</span>
+          </h2>
         </div>
 
         {/* Content Grid: Asymmetric */}

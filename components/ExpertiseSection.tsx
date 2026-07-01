@@ -10,8 +10,12 @@ export function ExpertiseSection() {
         {/* Header */}
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr] items-start">
           <div>
-            <span className="label-kicker">03 / Capabilities</span>
-            <h2 className="type-display-xl mt-6">Our Expertise</h2>
+            <span className="label-kicker">Capabilities</span>
+            <h2 className="type-display-xl mt-6">
+              Our
+              <br />
+              Expertise
+            </h2>
           </div>
           <p className="body-text text-secondary leading-relaxed">
             Decades of focused research and manufacturing excellence have built our reputation for consistency, quality, and scientific rigor in Ayurvedic formulation.

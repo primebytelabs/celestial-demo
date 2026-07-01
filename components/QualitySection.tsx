@@ -2,16 +2,22 @@
 
 import { Reveal } from '@/components/Reveal'
 import { company } from '@/lib/content'
+import { AmbientBackground } from '@/components/AmbientBackground'
 
 export function QualitySection() {
   return (
-    <section id="quality" className="section-gap bg-mist page-margin">
-      <div className="grid gap-24 lg:grid-cols-[1.5fr_1fr] items-start">
+    <section id="quality" className="section-gap bg-mist page-margin relative overflow-hidden">
+      <AmbientBackground />
+      <div className="relative z-10 grid gap-24 lg:grid-cols-[1.5fr_1fr] items-start">
         <Reveal>
           <div className="space-y-8">
             <div>
-              <span className="label-kicker">04 / Oversight</span>
-              <h2 className="type-display-lg mt-6">Quality & Compliance</h2>
+              <span className="label-kicker">Oversight</span>
+              <h2 className="type-display-lg mt-6">
+                Quality &amp;
+                <br />
+                <span className="text-accent">Compliance</span>
+              </h2>
             </div>
 
             <p className="type-display-md text-secondary">

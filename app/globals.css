@@ -1,51 +1,56 @@
 @import "tailwindcss";
 
-/* ─────────────────────────────────────────
-   CELESTIAL BIOLABS — SLEEK TECH-PHARMA SYSTEM
-   Every color is a variable. Toggle swaps [data-theme].
-───────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   CELESTIAL BIOLABS — MANKIND-STYLE AYURVEDIC SYSTEM
+   Cinematic, stat-driven, botanical-premium. [data-theme] toggle.
+═══════════════════════════════════════════════════════════ */
 
 :root,
 [data-theme="light"] {
-  --paper:        #FAF6EC; /* warm apothecary cream */
-  --surface:      #F2ECDC; /* herbal parchment surface */
-  --mist:         #F2ECDC; /* alias for surface (legacy) */
-  --ink:          #23211A; /* warm near-black */
-  --secondary:    #6E6555; /* muted taupe text */
-  --border:       #E5DAC5; /* soft sand border */
-  --border-line:  #E5DAC5; /* legacy alias */
+  --paper:        #FBFAF6; /* bg */
+  --surface:      #F1EFE7; /* surface / cards */
+  --mist:         #F1EFE7; /* legacy alias */
+  --ink:          #1C2118; /* text */
+  --secondary:    #5E6656; /* muted */
+  --border:       #E0DDD2; /* hairline */
+  --border-line:  #E0DDD2; /* legacy alias */
 
-  --accent:       #2E6A40; /* botanical leaf green — brand signal */
-  --accent-2:     #C79A3E; /* turmeric / ochre gold (warm partner) */
-  --accent-strong:#234F30; /* deeper green for hover */
-  --on-accent:    #FBF7EC; /* warm text on accent */
+  --accent:       #2F6B3C; /* deep botanical green */
+  --accent-2:     #C6A24A; /* warm gold (sparingly) */
+  --accent-strong:#245530; /* hover green */
+  --on-accent:    #FBFAF6; /* text on green */
 
-  --shadow-card:  0 1px 2px rgba(35, 33, 26, 0.04), 0 10px 30px rgba(35, 33, 26, 0.06);
-  --shadow-glow:  0 10px 28px rgba(46, 106, 64, 0.26);
+  --shadow-card:  0 1px 2px rgba(28, 33, 24, 0.04), 0 14px 40px rgba(28, 33, 24, 0.07);
+  --shadow-glow:  0 12px 34px rgba(47, 107, 60, 0.28);
+
+  --ambient-1:    rgba(47, 107, 60, 0.22);
+  --ambient-2:    rgba(198, 162, 74, 0.16);
 
   --section-gap:  clamp(4.5rem, 11vw, 10rem);
-  --page-margin:  max(1.5rem, calc((100vw - 1200px) / 2));
+  --page-margin:  max(1.5rem, calc((100vw - 1240px) / 2));
 }
 
 [data-theme="dark"] {
-  --paper:        #14170F; /* deep herbal forest-charcoal */
-  --surface:      #1D2117; /* dark botanical surface */
-  --mist:         #1D2117;
-  --ink:          #F1EBDC; /* warm bone */
-  --secondary:    #A79E88; /* sage-taupe */
-  --border:       #2E3325; /* mossy border */
-  --border-line:  #2E3325;
+  --paper:        #12160F;
+  --surface:      #1B2116;
+  --mist:         #1B2116;
+  --ink:          #F2F3EC;
+  --secondary:    #9AA491;
+  --border:       #2A311F;
+  --border-line:  #2A311F;
 
-  --accent:       #6FB37E; /* brighter leaf green for dark */
-  --accent-2:     #E0B25A; /* warm gold */
-  --accent-strong:#86C593;
-  --on-accent:    #12150E;
+  --accent:       #5FA36C; /* brighter green for dark */
+  --accent-2:     #D4B25C; /* warm gold */
+  --accent-strong:#7CBE88;
+  --on-accent:    #12160F;
 
   --shadow-card:  none;
-  --shadow-glow:  0 10px 30px rgba(111, 179, 126, 0.34);
+  --shadow-glow:  0 12px 36px rgba(95, 163, 108, 0.34);
+
+  --ambient-1:    rgba(95, 163, 108, 0.20);
+  --ambient-2:    rgba(212, 178, 92, 0.12);
 }
 
-/* Tailwind color tokens → CSS variables (so bg-paper / text-ink / etc. swap) */
 @theme inline {
   --color-paper:     var(--paper);
   --color-surface:   var(--surface);
@@ -57,21 +62,22 @@
   --color-border:    var(--border);
   --color-line:      var(--border);
   --color-accent:    var(--accent);
+  --color-gold:      var(--accent-2);
   --color-leaf:      var(--accent);
   --color-white:     var(--paper);
   --color-black:     var(--ink);
   --color-signal:    var(--accent);
 
   --font-sans:    var(--font-sans), system-ui, sans-serif;
-  --font-serif:   var(--font-display), system-ui, sans-serif;
-  --font-display: var(--font-display), system-ui, sans-serif;
+  --font-serif:   var(--font-display), Georgia, serif;
+  --font-display: var(--font-display), Georgia, serif;
 }
 
 html {
   overflow-x: hidden;
   background-color: var(--paper);
   scroll-behavior: smooth;
-  transition: background-color 0.35s ease;
+  transition: background-color 0.4s ease;
 }
 
 body {
@@ -82,233 +88,132 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  transition: background-color 0.35s ease, color 0.35s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-::selection {
-  background: var(--accent);
-  color: var(--on-accent);
-}
+::selection { background: var(--accent); color: var(--on-accent); }
 
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--paper); }
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 5px;
-  border: 2px solid var(--paper);
-}
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; border: 2px solid var(--paper); }
 
 /* ─── LAYOUT ─── */
 .page-margin { padding-inline: var(--page-margin); }
 .section-gap { padding-block: var(--section-gap); }
+@media (max-width: 768px) { :root { --section-gap: 4.5rem; } }
 
-@media (max-width: 768px) {
-  :root { --section-gap: 4.5rem; }
-}
-
-/* Asymmetric grids (7/5 · 8/4) */
 .grid-asymmetric-left {
-  display: grid;
-  gap: clamp(2.5rem, 6vw, 6rem);
-  grid-template-columns: 1.4fr 1fr;
-  align-items: center;
+  display: grid; gap: clamp(2.5rem, 6vw, 6rem);
+  grid-template-columns: 1.4fr 1fr; align-items: center;
 }
 .grid-asymmetric-right {
-  display: grid;
-  gap: clamp(2.5rem, 6vw, 6rem);
-  grid-template-columns: 1fr 1.4fr;
-  align-items: center;
+  display: grid; gap: clamp(2.5rem, 6vw, 6rem);
+  grid-template-columns: 1fr 1.4fr; align-items: center;
 }
 @media (max-width: 1024px) {
-  .grid-asymmetric-left,
-  .grid-asymmetric-right { grid-template-columns: 1fr; }
+  .grid-asymmetric-left, .grid-asymmetric-right { grid-template-columns: 1fr; }
 }
 
-/* ─── TYPOGRAPHY (Space Grotesk display · Inter body) ─── */
-
+/* ─── TYPOGRAPHY (Fraunces serif display · Inter body) ─── */
 .type-hero {
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(3.25rem, 8vw, 5.5rem);
+  font-weight: 600; line-height: 1.04; letter-spacing: -0.02em; color: var(--ink);
 }
-
-.type-display-xl,
-.type-editorial-large {
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-  font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+.type-display-xl, .type-editorial-large {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.5rem, 5.5vw, 4rem);
+  font-weight: 600; line-height: 1.06; letter-spacing: -0.02em; color: var(--ink);
 }
-
-.type-display-lg,
-.type-editorial-headline {
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(1.9rem, 3.5vw, 3rem);
-  font-weight: 600;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-  color: var(--ink);
+.type-display-lg, .type-editorial-headline {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 600; line-height: 1.1; letter-spacing: -0.015em; color: var(--ink);
 }
-
-.type-display-md,
-.type-editorial-title {
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: var(--ink);
+.type-display-md, .type-editorial-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink);
 }
-
 body, .body-text {
-  font-size: clamp(1.0625rem, 1.05vw, 1.125rem);
-  line-height: 1.6;
-  font-weight: 400;
+  font-size: clamp(1.0625rem, 1.05vw, 1.125rem); line-height: 1.6; font-weight: 400;
 }
 
-/* Accent gradient text (hero highlight only) */
 .text-gradient {
-  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 120%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
 }
 
-/* Eyebrow / kicker labels */
-.label-kicker,
-.type-label-botanical {
-  display: block;
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--secondary);
+/* Eyebrow labels — ALL CAPS letter-spaced */
+.label-kicker, .type-label-botanical {
+  display: block; font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--secondary);
 }
 .label-kicker-accent { color: var(--accent); }
 
-/* Numbered section markers */
 .section-number {
-  display: block;
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
-  color: var(--accent);
+  display: block; font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem); font-weight: 600;
+  font-variant-numeric: tabular-nums; letter-spacing: 0.04em; color: var(--accent);
 }
-
-/* Tabular figures for stats */
 .tabular { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
 
 /* ─── BUTTONS ─── */
-.btn-primary,
-.btn-medical {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+.btn-primary, .btn-medical {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   background: linear-gradient(100deg, var(--accent) 0%, var(--accent-strong) 120%);
-  color: var(--on-accent);
-  padding: 0.9rem 1.9rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  text-transform: none;
+  color: var(--on-accent); padding: 0.95rem 2rem; font-size: 0.95rem; font-weight: 600;
+  letter-spacing: 0.01em; border-radius: 10px; border: none; cursor: pointer;
+  text-transform: none; font-family: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-  font-family: inherit;
 }
-.btn-primary:hover,
-.btn-medical:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
-  filter: saturate(1.08);
-  opacity: 1;
+.btn-primary:hover, .btn-medical:hover {
+  transform: translateY(-2px); box-shadow: var(--shadow-glow); opacity: 1;
 }
-.btn-primary:active,
-.btn-medical:active { transform: translateY(0); }
+.btn-primary:active, .btn-medical:active { transform: translateY(0); }
 
-.btn-secondary,
-.btn-medical-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--border);
-  padding: 0.9rem 1.9rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border-radius: 10px;
-  cursor: pointer;
-  text-transform: none;
+.btn-secondary, .btn-medical-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  background: transparent; color: var(--ink); border: 1px solid var(--border);
+  padding: 0.95rem 2rem; font-size: 0.95rem; font-weight: 600; border-radius: 10px;
+  cursor: pointer; text-transform: none; font-family: inherit;
   transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
-  font-family: inherit;
 }
-.btn-secondary:hover,
-.btn-medical-outline:hover {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 6%, transparent);
+.btn-secondary:hover, .btn-medical-outline:hover {
+  border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent);
   transform: translateY(-2px);
 }
 
 /* ─── CARDS ─── */
-.card,
-.card-ruled {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: clamp(1.5rem, 3vw, 2.25rem);
-  box-shadow: var(--shadow-card);
+.card, .card-ruled {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: clamp(1.5rem, 3vw, 2.25rem); box-shadow: var(--shadow-card);
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
-.card:hover,
-.card-ruled:hover {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-  transform: translateY(-3px);
+.card:hover, .card-ruled:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); transform: translateY(-3px);
 }
 
 /* ─── INPUTS ─── */
-input, textarea,
-.input-medical {
-  font-family: inherit;
-  font-size: 1rem;
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.8rem 1rem;
-  color: var(--ink);
+input, textarea, .input-medical {
+  font-family: inherit; font-size: 1rem; width: 100%;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 0.8rem 1rem; color: var(--ink);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-input::placeholder, textarea::placeholder,
-.input-medical::placeholder { color: var(--secondary); }
-input:focus, textarea:focus,
-.input-medical:focus {
-  outline: none;
-  border-color: var(--accent);
+input::placeholder, textarea::placeholder, .input-medical::placeholder { color: var(--secondary); }
+input:focus, textarea:focus, .input-medical:focus {
+  outline: none; border-color: var(--accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
-/* ─── LINKS ─── */
+/* ─── LINKS & FOCUS ─── */
 a { color: var(--accent); text-decoration: none; transition: opacity 0.2s ease, color 0.2s ease; }
 a:hover { opacity: 0.82; }
-
-/* ─── FOCUS ─── */
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px;
 }
 
 /* ─── SECTION BACKGROUNDS ─── */
@@ -319,80 +224,114 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 /* ─── COLOR UTILITIES ─── */
 .text-secondary { color: var(--secondary); }
 .text-accent { color: var(--accent); }
+.text-gold { color: var(--accent-2); }
 .text-paper { color: var(--paper); }
 .bg-accent { background: var(--accent); }
-.bg-surface { background: var(--surface); }
-.bg-mist { background: var(--surface); }
+.bg-surface, .bg-mist { background: var(--surface); }
 .border-accent { border-color: var(--accent); }
 
-/* ─── HERO BOTANICAL ILLUSTRATION (signature visual) ─── */
-.botanical { color: var(--accent); }
-.botanical-stem {
-  stroke: currentColor;
-  stroke-width: 1.6;
-  fill: none;
-  opacity: 0.5;
-  stroke-linecap: round;
+/* ═══ AMBIENT ANIMATED BACKGROUND (video-ready) ═══ */
+.ambient { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.ambient::before, .ambient::after {
+  content: ''; position: absolute; border-radius: 50%; filter: blur(70px);
 }
-.botanical-leaf {
-  stroke: currentColor;
-  stroke-width: 1.4;
-  fill: color-mix(in srgb, var(--accent) 12%, transparent);
-  opacity: 0.7;
+.ambient::before {
+  width: 55vw; height: 55vw; max-width: 780px; max-height: 780px;
+  background: radial-gradient(circle, var(--ambient-1) 0%, transparent 68%);
+  top: -14%; right: -8%; animation: drift1 26s ease-in-out infinite;
 }
-.botanical-vein {
-  stroke: currentColor;
-  stroke-width: 1;
-  fill: none;
-  opacity: 0.5;
+.ambient::after {
+  width: 46vw; height: 46vw; max-width: 640px; max-height: 640px;
+  background: radial-gradient(circle, var(--ambient-2) 0%, transparent 68%);
+  bottom: -16%; left: -6%; animation: drift2 32s ease-in-out infinite;
 }
-.botanical-berry {
-  fill: var(--accent-2);
-  opacity: 0.85;
-  animation: berryPulse 7s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
+.ambient-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.35; z-index: -1;
 }
-.botanical-berry.b2 { animation-delay: -2.5s; }
-.botanical-berry.b3 { animation-delay: -4.5s; }
-.botanical-sway {
-  transform-box: fill-box;
-  transform-origin: bottom center;
-  animation: leafSway 9s ease-in-out infinite;
+@keyframes drift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-4%, 6%) scale(1.12); }
 }
-.botanical-glow {
-  fill: url(#botanicalGlow);
-  opacity: 0.9;
-  animation: glowPulse 12s ease-in-out infinite;
+@keyframes drift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(5%, -5%) scale(1.15); }
 }
 
-@keyframes leafSway {
-  0%, 100% { transform: rotate(-1.6deg); }
-  50%      { transform: rotate(1.6deg); }
+/* Full-screen hero shell */
+.hero-shell { position: relative; min-height: 100vh; overflow: hidden; }
+
+/* Floating certification badge */
+.cert-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: color-mix(in srgb, var(--paper) 80%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--accent-2); border-radius: 999px;
+  padding: 0.5rem 1rem; box-shadow: var(--shadow-card);
 }
-@keyframes berryPulse {
-  0%, 100% { transform: scale(1);    opacity: 0.7; }
-  50%      { transform: scale(1.18); opacity: 1; }
+.cert-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); }
+.cert-badge span { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
+
+/* Scroll cue */
+.scroll-cue { width: 22px; height: 36px; border: 1.5px solid var(--secondary); border-radius: 12px; position: relative; }
+.scroll-cue::after {
+  content: ''; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px;
+  border-radius: 2px; background: var(--accent); transform: translateX(-50%);
+  animation: scrollDot 1.8s ease-in-out infinite;
 }
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.55; transform: scale(1); }
-  50%      { opacity: 0.95; transform: scale(1.05); }
+@keyframes scrollDot {
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  40% { opacity: 1; }
+  80% { opacity: 0; transform: translate(-50%, 12px); }
+  100% { opacity: 0; }
 }
+
+/* Big-number stat */
+.stat-figure {
+  font-family: var(--font-display), Georgia, serif; font-weight: 600;
+  font-size: clamp(2.75rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -0.02em;
+  color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.stat-figure .unit { color: var(--accent); }
+.stat-label { margin-top: 0.5rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--secondary); }
+
+/* ═══ BUSINESS-VERTICALS CARD ═══ */
+.vertical-card {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 320px; padding: 2rem; border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--border); background: var(--surface); isolation: isolate;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.vertical-card::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 14%, transparent) 0%, transparent 55%);
+  opacity: 0; transition: opacity 0.35s ease;
+}
+.vertical-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow-card); }
+.vertical-card:hover::before { opacity: 1; }
+.vertical-card .idx {
+  position: absolute; top: 1.5rem; left: 2rem; font-family: var(--font-display), serif;
+  font-size: 1rem; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums;
+}
+.vertical-card .arrow { transition: transform 0.3s ease; color: var(--accent); }
+.vertical-card:hover .arrow { transform: translate(4px, -4px); }
 
 /* ─── SCROLL REVEAL ─── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 .fade-up { animation: fadeUp 500ms ease-out both; }
+
+/* ─── HERO BOTANICAL (kept, subtle) ─── */
+.botanical { color: var(--accent); }
+.botanical-stem { stroke: currentColor; stroke-width: 1.6; fill: none; opacity: 0.4; stroke-linecap: round; }
+.botanical-leaf { stroke: currentColor; stroke-width: 1.4; fill: color-mix(in srgb, var(--accent) 12%, transparent); opacity: 0.6; }
+.botanical-vein { stroke: currentColor; stroke-width: 1; fill: none; opacity: 0.45; }
+.botanical-berry { fill: var(--accent-2); opacity: 0.85; }
 
 /* ─── REDUCED MOTION ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important; scroll-behavior: auto !important;
   }
 }
 

@@ -29,10 +29,12 @@ export function AboutSection() {
         {/* Right: Copy (wider) */}
         <Reveal>
           <div className="space-y-8">
-            <span className="label-kicker">02 / Our Story</span>
+            <span className="label-kicker">Our Story</span>
 
             <h2 className="type-display-lg">
-              Generations of trust in quality
+              Generations of trust
+              <br />
+              <span className="text-accent">in quality</span>
             </h2>
 
             <p className="type-display-md text-secondary">
