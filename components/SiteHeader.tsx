@@ -13,12 +13,25 @@ const LINKS = [
 function Wordmark() {
   return (
     <span className="flex items-center gap-2.5">
+      <svg
+        viewBox="0 0 24 24"
+        className="h-5 w-5"
+        style={{ color: 'var(--accent)' }}
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 21C12 13 7 8 4 6c0 8 3 13 8 15Zm0 0c0-8 5-13 8-15 0 8-3 13-8 15Z"
+          fill="currentColor"
+          fillOpacity="0.18"
+          stroke="currentColor"
+          strokeWidth="1.3"
+          strokeLinejoin="round"
+        />
+        <path d="M12 21C12 15 12 10 12 6" stroke="currentColor" strokeWidth="1.1" />
+      </svg>
       <span
-        className="inline-block h-2.5 w-2.5 rounded-full"
-        style={{ background: 'linear-gradient(120deg, var(--accent), var(--accent-2))' }}
-      />
-      <span
-        className="text-[1.05rem] font-semibold tracking-tight"
+        className="text-[1.1rem] font-semibold tracking-tight"
         style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}
       >
         Celestial Biolabs

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import SmoothScroll from "@/components/SmoothScroll";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -12,9 +12,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const fraunces = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
+  style: ["normal", "italic"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
@@ -32,7 +33,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="light"
-      className={`${inter.variable} ${spaceGrotesk.variable}`}
+      className={`${inter.variable} ${fraunces.variable}`}
     >
       <head>
         {/* Inline script: set theme before paint (no flash), respect saved choice + system pref */}
